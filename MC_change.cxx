@@ -71,8 +71,6 @@ MC_change::execute()
 // std::cout<<fNTE<<"   "<<fpTEX->size()<<"  "<<fpTEEnergy->size()<<std::endl;
    for(int i=0; i<fNTE; i++){
       fTEEnergy.push_back( 9.47e-7 ); //Must be valued. 
-      for(int i=0; i<fNTE; i++){
-      fTEEnergy.push_back( 9.47e-7 );
       fTEX.push_back( (double)(*fpTEX)[i] );
       fTEY.push_back( (double)(*fpTEY)[i] );
       fTEZ.push_back( (double)(*fpTEZ)[i] );
