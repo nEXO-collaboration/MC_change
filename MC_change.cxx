@@ -54,7 +54,7 @@ MC_change::initialize()
    t1->SetBranchAddress("TEX", &fpTEX);
    t1->SetBranchAddress("TEY", &fpTEY);
    t1->SetBranchAddress("TEZ", &fpTEZ);
-   EVENT=1;
+   EVENT=0;
    return true;
 }
 
