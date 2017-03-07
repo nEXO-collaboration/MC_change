@@ -1,0 +1,13 @@
+package MyAlg
+
+package MyAlg
+use SniperKernel v*
+use EvtNavigator v* DataModel
+use SimEvent v* DataModel
+use RootWriter v* SniperSvc
+use RootIOSvc v* RootIO
+use Geometry v* Detector 
+library MyAlg *.cxx
+apply_pattern linker_library library=MyAlg
+
+
