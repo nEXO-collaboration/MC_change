@@ -1,25 +1,14 @@
 #include "MC_change.h"
 #include "SniperKernel/AlgFactory.h"
 #include "SniperKernel/SniperPtr.h"
-#include "SniperKernel/SniperDataPtr.h"
-#include "BufferMemMgr/EvtDataPtr.h"
-//#include "Event/PidTmvaHeader.h"
 #include "EvtNavigator/NavBuffer.h"
 #include "Event/SimHeader.h"
-//#include "Event/ElecHeader.h"
 #include "BufferMemMgr/IDataMemMgr.h"
+#include "RootIOSvc/RootOutputSvc.h"
+#include "Geometry/SimGeomSvc.h"
 
-#include "RootWriter/RootWriter.h"
-#include "TMath.h"
-#include "TFile.h"
-#include "TTree.h"
-#include "TH1.h"
-#include "TGraphErrors.h"
 #include "TROOT.h"
-#include "TCanvas.h"
-#include "TStyle.h"
-#include "TLegend.h"
-#include "TLegendEntry.h"
+#include "TGeoManager.h"
 
 DECLARE_ALGORITHM(MC_change);
 
@@ -55,6 +44,22 @@ MC_change::initialize()
    t1->SetBranchAddress("TEY", &fpTEY);
    t1->SetBranchAddress("TEZ", &fpTEZ);
    EVENT=0;
+
+   TGeoManager* nEXOGeometry = (TGeoManager*) f->Get("nEXOGeometry");
+
+   // SimGeomSvc parts copied from :
+   // nexo-offline/Simulation/DetSim/nEXOSim/src/nEXOAnalysis.cc
+
+   SniperPtr<RootOutputSvc> output_svc("OutputSvc");
+   if (output_svc.invalid()) {
+      LogWarn << "Can't find the OutputSvc in current task." << std::endl;
+      return false;
+   }
+   bool status = output_svc->attachObj("/Event/Sim", nEXOGeometry);
+
+   SniperPtr<SimGeomSvc> simgeom_svc("SimGeomSvc");
+   simgeom_svc->geom(nEXOGeometry);
+
    return true;
 }
 
