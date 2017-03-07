@@ -3,6 +3,7 @@
 
 #include "SniperKernel/AlgBase.h"
 #include "TROOT.h"
+#include "TFile.h"
 #include "TTree.h"
 #include "TH1.h"
 #include "TH2.h"
